@@ -1,9 +1,22 @@
 import 'package:flutter/material.dart';
+import 'package:hive_flutter/hive_flutter.dart';
+import 'package:prov/data/models/todo/todo_model.dart';
 import 'package:prov/presentations/screens/home/home_screen.dart';
 import 'package:prov/providers/todo_provider.dart';
 import 'package:provider/provider.dart';
 
-void main() {
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  // 1. Hive'ı başlat
+  await Hive.initFlutter();
+  
+  // 2. Adapter'ı kaydet (todo_model.g.dart oluştuktan sonra)
+  Hive.registerAdapter(TodoAdapter());
+  
+  // 3. Kutuyu aç
+  await Hive.openBox<Todo>('todos');
+
   runApp(
     ChangeNotifierProvider(
       create: (context) => TodoProvider(),

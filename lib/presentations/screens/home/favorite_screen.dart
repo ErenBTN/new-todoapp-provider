@@ -6,6 +6,8 @@ class FavoriteScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+              backgroundColor: const Color.fromARGB(255, 182, 182, 182),
+
       appBar: AppBar(title: const Text("Favorites")),
       body: Consumer<TodoProvider>(
         builder: (context, todoProvider, child) {
